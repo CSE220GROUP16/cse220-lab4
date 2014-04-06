@@ -16,7 +16,7 @@ using namespace std;
 
 class LinkedList
 {
-    LinkedList * tail;
+    //LinkedList * tail;
     public:
         LinkedList();
         ~LinkedList();

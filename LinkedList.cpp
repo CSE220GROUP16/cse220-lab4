@@ -11,11 +11,11 @@ using namespace std;
 
 LinkedList::LinkedList()
 {
-  tail=NULL;
+  //tail=NULL;
 }
 LinkedList::~LinkedList()
 {
-  destroy_LinkedList(tail);
+  //destroy_LinkedList();
 }
 void LinkedList::setLineNum(int LN)
 {
@@ -53,35 +53,28 @@ void LinkedList::insert(int LineNum, LinkedList * LList)
 
     //insert at tail if tail == NULL
     //cout<< "the tail link number is "<<"\t"<<LList->LineNum<<"\n";
+    LinkedList * newList, *temp;
+    newList=new LinkedList;
+    newList->setLineNum(LineNum);
+    newList->previous=NULL;
 
-    if (LineNum==1)
+    if (LList==NULL)
     {
-      LList=new LinkedList();
-      LList->LineNum=LineNum;
+      LList=newList;
       LList->previous=NULL;    //Sets the left child of the child node to null
       //tail = LList;
-     cout<< "the tail link number is "<<"\t"<<LList->LineNum<<"\n";
+     cout<< "the tail link number is "<<"\t"<<LList->getLineNum()<<"\n";
     }
-
     //insert at left child <
-  else
-  {
-     if(LList->previous!=NULL)
-     insert(LineNum, LList->previous);
-     else
-     {
-      LList->previous=new LinkedList();
-      LList->previous->LineNum=LineNum;
-      LList->previous->previous=NULL;
-     }
-
-      //cout<< "the link number is "<<"\t"<<LList->LineNum<<"\n";
-   }
-
-
-
-
-
+    else
+    {
+        temp=LList;
+        while(temp!=NULL)
+        {
+          temp=temp->previous;
+        }
+        LList->previous=newList;
+    }
 }
 
 

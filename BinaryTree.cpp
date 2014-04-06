@@ -4,8 +4,9 @@
 //
 //  Created by Bryce Holton.
 //
-#include<string>
-#include<iostream>
+#include <string>
+#include <iostream>
+#include <stdio.h>
 #include "BinaryTree.h"
 using namespace std;
 
@@ -35,47 +36,98 @@ void btree::display_tree(btree * leaf)
     display_tree(leaf->Lleaf);
     display_tree(leaf->Rleaf);
     //display only valid leaf token string
-    cout<< "the leaf data is "<<"\t"<<leaf->myLlist->getLineNum()<<"\t"<<leaf->mytoken->getTokenString()<<"\n";
+
+    cout<<"identifier\t line number\n";
+    cout<<"~~~~~~~~~~~~\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+    cout<<leaf->mytoken->getTokenString()<<"\t";
+    LinkedList*temp;
+    temp=leaf->myLlist;
+    while(temp!=NULL)
+    {
+        cout<<temp->getLineNum()<<"\t";
+    }
   }
 }
 
 
-void btree::insert(string key, int LN, btree * leaf)
+void btree::insert(string key, int LN)
 {
-    /*
-    btree * mytree, *temp;
-    mytree = new btree;
-    mytree->IDValue=key;
-    mytree->mytoken=new Token;
-    mytree->mytoken->setTokenString(key);
-    mytree->myLlist=new LinkedList;
-    mytree->myLlist->setLineNum(LN);
+
+    btree * newtree, *temp, * current;
+    newtree = new btree;
+    newtree->IDValue=key;
+    newtree->mytoken=new Token;
+    newtree->mytoken->setTokenString(key);
+    newtree->myLlist=new LinkedList;
+    newtree->myLlist->setLineNum(LN);
+    newtree->Lleaf=NULL;
+    newtree->Rleaf=NULL;
+    bool isToken = false;
+    bool insertLleaf = false;
+
 
     if (root == NULL)
     {
-        root=mytree;
-        root->Lleaf=NULL;
-        root->Rleaf=NULL;
+        root=new btree;
+        root = newtree;
         cout<< "i am at the root  and the key is "<<root->mytoken->getTokenString()<<"\n";
     }
     else
     {
-        temp = root;
+        current = root;
 
         //insert at left leaf
-        while(key<temp->mytoken->getTokenString()&&temp->Lleaf!=NULL)
+        while(current)
         {
-            temp = root->Lleaf;
-          cout<< "i am at the leaf  and the key is "<<key<<"\n";
+            if (key==current->mytoken->getTokenString())
+            {
+                 cout<< "match found "<<key<<"\t and "<<current->mytoken->getTokenString()<<"\n";
+                isToken=true;
+                break;
+            }
+
+            else if (key<current->mytoken->getTokenString())
+            {
+                cout<< "inside the left leaf "<<key<<"\t and "<<current->mytoken->getTokenString()<<"\n";
+                temp = current;
+                current=current->Lleaf;
+                insertLleaf=true;
+            }
+            else
+            {
+                cout<< "inside the right leaf "<<key<<"\t and "<<current->mytoken->getTokenString()<<"\n";
+                temp = current;
+                current=current->Rleaf;
+            }
         }
 
-        //insert at right leaf
-    }
-*/
+        if(isToken==true)
+        {
+             cout<< "building the linkedlist "<<"\n";
+            current->myLlist->insert(LN, current->myLlist);
+        }
+        else
+        {
+            if (insertLleaf)
+            {
+               temp->Lleaf=newtree;
+               cout<< "i am at the leaf  and the key is "<<temp->mytoken->getTokenString()<<"\n";
+            }
+            else
+            {
+                temp->Rleaf=newtree;
+            }
 
+            //temp->mytoken=newtree->mytoken;
+            //temp->myLlist=newtree->myLlist;
+            //temp->Lleaf=NULL;
+            //temp->Rleaf=NULL;
+
+        }
+    }
     //insert at root
     //cout<< "i am at inside insert  and the key is "<<key<<"\n";
-
+/*
     if (root==NULL)
     {
       root=new btree;
@@ -137,7 +189,8 @@ void btree::insert(string key, int LN, btree * leaf)
     }
     //cout<< "i am at the Rleaf  and the key is "<<leaf->Rleaf->IDValue<<"\n";
   }
-    //cout<< "i am at the end and the key is "<<leaf->IDValue<<"\n";
+    //cout<< "i am at the end and the key is "<<leaf->IDValue<<"\n
+    */
 }
 
 

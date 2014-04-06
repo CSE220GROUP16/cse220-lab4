@@ -44,8 +44,9 @@ int main(int argc, const char * argv[])
             //cout<< "token string is " <<token->getTokenString()<<"\t line number is "<<scanner.getLineNum()<<"\n";
             //mytree.insert(token->getTokenString(), scanner.getLineNum());
 
-            // insert data into the binary tree but can not access to the root pointer
-            mytree.insert(token->getTokenString(), scanner.getLineNum(), newbtree);
+            // insert data into the binary tree
+            //mytree.insert(token->getTokenString(), scanner.getLineNum(), root);
+            mytree.insert(token->getTokenString(), scanner.getLineNum());
         }
 
         if (token->getCode() != PERIOD && token->getCode() != END_OF_FILE)
@@ -55,7 +56,7 @@ int main(int argc, const char * argv[])
     }
     while (token->getCode() != PERIOD && token->getCode() != END_OF_FILE);
 
-    mytree.display_tree(newbtree);
+    mytree.display_tree(root);
     //mylist->display_LinkedList(mylist);
 
     delete token;
