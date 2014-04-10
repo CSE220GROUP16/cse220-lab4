@@ -17,7 +17,10 @@ Node::~Node()
 {
 
 }
+void Node::destroy_node()
+{
 
+}
 void Node::SetData(int LN)
 {
     data = LN;
@@ -56,8 +59,8 @@ void List::display_list() {
     {
         while ( temp != NULL )
         {
-        cout << temp->GetData()<<"\t";
-        temp = temp->GetNext();
+            cout << temp->GetData()<<"\t";
+            temp = temp->GetNext();
         }
     }
     else
@@ -77,20 +80,19 @@ void List::insert(int data) {
     {
         while ( temp->GetNext() != NULL )
         {
-        temp = temp->GetNext();
+            temp = temp->GetNext();
         }
     temp->SetNext(newNode);
     }
     else
     {
-    head = newNode;
+        head = newNode;
     }
 }
 
 // deallocate memory delete the list
-void List::Delete(int data)
+void List::destroy_list()
 {
-
     // head pointer
     Node *temp = head;
 
@@ -99,9 +101,11 @@ void List::Delete(int data)
     {
         while ( head != NULL )
         {
-        temp=head;
-        head = head->GetNext();
-        delete temp;
+            temp=head;
+            //delete node
+            temp->destroy_node();
+            head = head->GetNext();
+            delete temp;
         }
     }
     else

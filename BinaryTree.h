@@ -22,8 +22,9 @@ class btree
         btree();
         ~btree();
         void insert(string key, int LN);
+        //void destroy_tree();
         void destroy_tree(btree * leaf);
-        void display_tree();
+        //void display_tree();
         void display_tree(btree *leaf);
 
     private:

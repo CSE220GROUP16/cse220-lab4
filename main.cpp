@@ -53,7 +53,8 @@ int main(int argc, const char * argv[])
 
     //display data in the tree
     //cout<<"my tree is "<<mytree.IDValue<<endl;
-    mytree.display_tree();
+    mytree.display_tree(root);
+    mytree.destroy_tree(root);
     //mytree.display_tree(root);
     //mylist->display_LinkedList(mylist);
 

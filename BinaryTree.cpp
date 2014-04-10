@@ -31,9 +31,13 @@ void btree::destroy_tree(btree * leaf)
       {
           destroy_tree(leaf->Lleaf);
           destroy_tree(leaf->Rleaf);
-          //call delete list
+          // delete list
+           leaf->myLlist.destroy_list();
+          //delete leaf
           delete leaf;
       }
+      //test case for access tree after memory deallocation
+      //cout<<leaf->mytoken->getTokenString()<<"\t\t";
 }
 
 void btree::display_tree(btree * leaf)

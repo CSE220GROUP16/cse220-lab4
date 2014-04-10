@@ -22,10 +22,11 @@ class Node {
   public:
     Node();
     ~Node();
-    void SetData(int LN);
-    void SetNext(Node* NextNode);
     int GetData();
     Node* GetNext();
+    void SetData(int LN);
+    void SetNext(Node* NextNode);
+    void destroy_node();
 };
 
 // List class
@@ -37,7 +38,7 @@ class List {
     ~List();
     void display_list();
     void insert(int data);
-    void Delete(int data);
+    void destroy_list();
 };
 
 
