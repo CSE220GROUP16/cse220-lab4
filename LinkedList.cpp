@@ -59,6 +59,7 @@ void List::display_list() {
     {
         while ( temp != NULL )
         {
+            //display line number in the list
             cout << temp->GetData()<<"\t";
             temp = temp->GetNext();
         }
@@ -79,13 +80,14 @@ void List::insert(int data) {
     if ( temp != NULL )
     {
         while ( temp->GetNext() != NULL )
-        {
+        {   //travel to the end of the link list
             temp = temp->GetNext();
         }
     temp->SetNext(newNode);
     }
     else
     {
+        //new head
         head = newNode;
     }
 }

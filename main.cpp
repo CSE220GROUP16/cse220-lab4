@@ -34,16 +34,19 @@ int main(int argc, const char * argv[])
     Scanner scanner(source_file, source_name, date, print);
     btree mytree;
 
+    //loop thru all source line by line
     do
     {
-        token = scanner.getToken();
-        print.printToken(token);
+        token = scanner.getToken(); //create token for each entry
+        print.printToken(token);    // print each token
 
-        if (token->getCode() == IDENTIFIER)
+        if (token->getCode() == IDENTIFIER) //only add identifier in the list
         {
+            //insert data in the list
             mytree.insert(token->getTokenString(), scanner.getLineNum());
         }
 
+        //delete token after
         if (token->getCode() != PERIOD && token->getCode() != END_OF_FILE)
         {
           delete token;
@@ -53,8 +56,9 @@ int main(int argc, const char * argv[])
 
     //display data in the tree
     //cout<<"my tree is "<<mytree.IDValue<<endl;
-    mytree.display_tree(root);
-    mytree.destroy_tree(root);
+    mytree.display_tree(root);  //display the tree, function inside the tree to
+                                //display line number in the list
+    mytree.destroy_tree(root);  //destroy the tree
     //mytree.display_tree(root);
     //mylist->display_LinkedList(mylist);
 

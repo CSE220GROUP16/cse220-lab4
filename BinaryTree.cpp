@@ -27,6 +27,7 @@ void btree::destroy_tree(btree * leaf)
         i =0;
         leaf = root;
       }
+      //delete the binary tree by recursive
       if(leaf!=NULL)
       {
           destroy_tree(leaf->Lleaf);
