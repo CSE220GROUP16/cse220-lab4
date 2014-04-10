@@ -14,28 +14,31 @@
 
 using namespace std;
 
-class LinkedList
-{
-    //LinkedList * tail;
-    public:
-        LinkedList();
-        ~LinkedList();
+// Node class
+class Node {
+    int data;
+    Node* next;
 
-        void insert(int LineNum, LinkedList * LList);
-        //node *search(string key);
-        void destroy_LinkedList();
-        void display_LinkedList(LinkedList * LList);
-        int getLineNum();
-        void setLineNum(int LN);
-
-    private:
-        int LineNum;
-        LinkedList * previous;
-        void destroy_LinkedList(LinkedList *LList);
-        //void insert(string key, btree *leaf);
-
-        //node *search(string key, node *leaf);
-        //btree *root, *left, *right;
+  public:
+    Node();
+    ~Node();
+    void SetData(int LN);
+    void SetNext(Node* NextNode);
+    int GetData();
+    Node* GetNext();
 };
+
+// List class
+class List {
+    Node *head;
+
+  public:
+    List();
+    ~List();
+    void display_list();
+    void insert(int data);
+    void Delete(int data);
+};
+
 
 #endif /* defined(__Lab4__Token__) */

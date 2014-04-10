@@ -18,6 +18,7 @@ FILE *init_lister(const char *name, char source_file_name[], char dte[]);
 void quit_scanner(FILE *src_file, Token *list);
 void add_token_to_list(Token *list, Token *new_token);
 
+
 int main(int argc, const char * argv[])
 {
     /******************************************
@@ -31,21 +32,15 @@ int main(int argc, const char * argv[])
     FILE *source_file = init_lister(argv[1], source_name, date);
     Print print(source_name, date);
     Scanner scanner(source_file, source_name, date, print);
-    btree mytree, * newbtree=new btree;
-    LinkedList * mylist=new LinkedList;
+    btree mytree;
 
     do
     {
         token = scanner.getToken();
+        print.printToken(token);
 
-        if (token->getCode() == 1)
+        if (token->getCode() == IDENTIFIER)
         {
-            //print.printToken(token);
-            //cout<< "token string is " <<token->getTokenString()<<"\t line number is "<<scanner.getLineNum()<<"\n";
-            //mytree.insert(token->getTokenString(), scanner.getLineNum());
-
-            // insert data into the binary tree
-            //mytree.insert(token->getTokenString(), scanner.getLineNum(), root);
             mytree.insert(token->getTokenString(), scanner.getLineNum());
         }
 
@@ -56,12 +51,15 @@ int main(int argc, const char * argv[])
     }
     while (token->getCode() != PERIOD && token->getCode() != END_OF_FILE);
 
-    mytree.display_tree(root);
+    //display data in the tree
+    //cout<<"my tree is "<<mytree.IDValue<<endl;
+    mytree.display_tree();
+    //mytree.display_tree(root);
     //mylist->display_LinkedList(mylist);
 
     delete token;
-    //delete //mytree;
-    delete mylist;
+    //delete list
+    //delete mytree;
     fclose(source_file);
     return 0;
 }

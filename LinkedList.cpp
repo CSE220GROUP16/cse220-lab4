@@ -9,72 +9,101 @@
 #include "LinkedList.h"
 using namespace std;
 
-LinkedList::LinkedList()
+Node::Node()
 {
-  //tail=NULL;
-}
-LinkedList::~LinkedList()
-{
-  //destroy_LinkedList();
-}
-void LinkedList::setLineNum(int LN)
-{
-    this->LineNum=LN;
-}
 
-int LinkedList::getLineNum()
-{
-    return this->LineNum;
 }
-
-void LinkedList::destroy_LinkedList(LinkedList * LList)
+Node::~Node()
 {
-  if(LList!=NULL)
-  {
-    destroy_LinkedList(LList->previous);
-    delete LList;
-  }
-}
-
-void LinkedList::display_LinkedList(LinkedList * LList)
-{
-    LinkedList * temp = LList;
-  while(temp!=NULL)
-  {
-    //display_LinkedList(LList->previous);
-    cout<< "the link number is "<<"\t"<<temp->LineNum<<"\n";
-    temp=temp->previous;
-  }
 
 }
 
-void LinkedList::insert(int LineNum, LinkedList * LList)
+void Node::SetData(int LN)
+{
+    data = LN;
+}
+void Node::SetNext(Node* NextNode)
+{
+    next = NextNode;
+}
+int Node::GetData()
+{
+    return data;
+}
+Node* Node::GetNext()
+{
+    return next;
+}
+// initialize head
+List::List()
+{
+    head = NULL;
+}
+// destructor
+List::~List()
 {
 
-    //insert at tail if tail == NULL
-    //cout<< "the tail link number is "<<"\t"<<LList->LineNum<<"\n";
-    LinkedList * newList, *temp;
-    newList=new LinkedList;
-    newList->setLineNum(LineNum);
-    newList->previous=NULL;
+}
 
-    if (LList==NULL)
+// Print all data in the list
+void List::display_list() {
+
+    // head pointer
+    Node *temp = head;
+
+    // print the list
+    if ( temp != NULL )
     {
-      LList=newList;
-      LList->previous=NULL;    //Sets the left child of the child node to null
-      //tail = LList;
-     cout<< "the tail link number is "<<"\t"<<LList->getLineNum()<<"\n";
+        while ( temp != NULL )
+        {
+        cout << temp->GetData()<<"\t";
+        temp = temp->GetNext();
+        }
     }
-    //insert at left child <
+    else
+    {}
+}
+
+// insert at the end of the list
+void List::insert(int data) {
+
+    // Create a new node to store new data
+    Node* temp, *newNode = new Node();
+    newNode->SetData(data);
+    newNode->SetNext(NULL);
+    temp = head;
+
+    if ( temp != NULL )
+    {
+        while ( temp->GetNext() != NULL )
+        {
+        temp = temp->GetNext();
+        }
+    temp->SetNext(newNode);
+    }
     else
     {
-        temp=LList;
-        while(temp!=NULL)
-        {
-          temp=temp->previous;
-        }
-        LList->previous=newList;
+    head = newNode;
     }
 }
 
+// deallocate memory delete the list
+void List::Delete(int data)
+{
 
+    // head pointer
+    Node *temp = head;
+
+    // delete the list
+    if ( head != NULL )
+    {
+        while ( head != NULL )
+        {
+        temp=head;
+        head = head->GetNext();
+        delete temp;
+        }
+    }
+    else
+    {}
+}

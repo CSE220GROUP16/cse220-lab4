@@ -23,18 +23,17 @@ class btree
         ~btree();
         void insert(string key, int LN);
         void destroy_tree(btree * leaf);
+        void display_tree();
         void display_tree(btree *leaf);
 
     private:
         string IDValue;
         Token * mytoken;
-        LinkedList * myLlist;
+        List myLlist;
         btree * Lleaf, *Rleaf;
+
         //void destroy_tree(btree *leaf);
         //void insert(string key, btree *leaf);
-
-        //node *search(string key, node *leaf);
-        //btree *root, *left, *right;
 };
 static btree * root;
 
